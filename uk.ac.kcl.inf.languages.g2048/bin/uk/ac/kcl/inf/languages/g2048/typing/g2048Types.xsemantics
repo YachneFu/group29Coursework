@@ -1,0 +1,28 @@
+import uk.ac.kcl.inf.languages.g2048.validation.AbstractG2048Validator
+import uk.ac.kcl.inf.languages.g2048.g2048.TitleDefineStatement
+import uk.ac.kcl.inf.languages.g2048.g2048.Statement
+import uk.ac.kcl.inf.languages.g2048.g2048.SizeDefineStatement
+import uk.ac.kcl.inf.languages.g2048.g2048.LevelDefineStatement
+
+system uk.ac.kcl.inf.languages.g2048.typing.g2048TypeSystem
+
+validatorExtends AbstractG2048Validator
+
+judgments {
+	type |- Statement state : output g2048Type
+		cached
+		error "Cannot type " + stringRep(state)
+}
+
+axiom rulesTitle
+	G |- TitleDefineStatement exp : g2048Type.STRING
+	
+axiom rulesSize
+	G |- SizeDefineStatement exp : g2048Type.INT
+	
+axiom rulesLevel
+	G |- LevelDefineStatement exp : g2048Type.STRING
+
+	
+	
+	

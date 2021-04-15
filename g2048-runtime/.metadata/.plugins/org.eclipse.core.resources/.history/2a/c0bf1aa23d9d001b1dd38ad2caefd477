@@ -1,0 +1,26 @@
+import java.util.HashMap;
+import uk.ac.kcl.inf.languages.g2048.library.*;
+
+public class TestG2048 {
+
+	public static void main(String[] args) {
+        
+		int topValue=0;
+		String title="";
+		int mapsize=0;
+		
+        HashMap<Integer, String> elements = new HashMap<Integer,String>();
+        elements.put(0,"");
+        title="2048";
+        mapsize=5;
+        elements.put(2,"2");topValue=2;
+        
+        elements.put(4,"4");topValue=4;
+        
+        elements.put(8,"8");topValue=8;
+        
+        new G2048Frame(title,mapsize,elements,topValue);
+        
+    }
+}
+

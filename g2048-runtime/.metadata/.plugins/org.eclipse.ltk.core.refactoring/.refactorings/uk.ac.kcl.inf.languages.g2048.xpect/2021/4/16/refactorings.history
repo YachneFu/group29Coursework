@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;uk.ac.kcl.inf.languages.g2048.xpect/src/uk/ac/kcl/inf/languages/g2048/xpect/test3.g2048.xt&apos; to &apos;test0.g2048.xt&apos;" description="Rename resource &apos;test3.g2048.xt&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/uk/ac/kcl/inf/languages/g2048/xpect/test3.g2048.xt" name="test0.g2048.xt" stamp="1618419537293" updateReferences="true"/>
+</session>

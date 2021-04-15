@@ -1,0 +1,34 @@
+grammar uk.ac.kcl.inf.languages.g2048.G2048 with org.eclipse.xtext.common.Terminals
+
+generate g2048 "http://www.ac.uk/kcl/inf/languages/g2048/G2048"
+
+G2048Program:
+	statements += Statement*
+;
+
+Statement:
+	SizeDefineStatement |
+	LevelDefineStatement |
+	TitleDefineStatement
+;
+
+TitleDefineStatement:
+	"title" title=STRING
+;
+
+SizeDefineStatement:
+	"size" size=INT
+;
+
+LevelDefineStatement:
+	"level" level=Level ":" element=STRING
+;
+
+enum Level:
+	one | two | three | four | five | six | seven | eight | nine | ten | eleven
+;
+
+
+
+
+

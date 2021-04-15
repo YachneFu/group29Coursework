@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: uk.ac.kcl.inf.languages.g2048
+Bundle-ManifestVersion: 2
+Bundle-Name: uk.ac.kcl.inf.languages.g2048
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: uk.ac.kcl.inf.languages.g2048; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ it.xsemantics.runtime;bundle-version="1.12.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: uk.ac.kcl.inf.languages.g2048.g2048.util,
+ uk.ac.kcl.inf.languages.g2048.validation,
+ uk.ac.kcl.inf.languages.g2048.parser.antlr,
+ uk.ac.kcl.inf.languages.g2048.g2048,
+ uk.ac.kcl.inf.languages.g2048.parser.antlr.internal,
+ uk.ac.kcl.inf.languages.g2048.serializer,
+ uk.ac.kcl.inf.languages.g2048.services,
+ uk.ac.kcl.inf.languages.g2048,
+ uk.ac.kcl.inf.languages.g2048.scoping,
+ uk.ac.kcl.inf.languages.g2048.g2048.impl,
+ uk.ac.kcl.inf.languages.g2048.generator
+Import-Package: org.apache.log4j

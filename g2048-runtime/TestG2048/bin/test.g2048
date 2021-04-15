@@ -1,0 +1,13 @@
+title "2048"
+size 4
+level one:"2"
+level two:"4"
+level three:"8"
+level four:"16"
+level five:"32"
+level six:"64"
+level seven:"128"
+level eight:"256"
+level nine:"512"
+level ten:"1024"
+level eleven:"2048"

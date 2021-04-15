@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="g2048" nsURI="http://www.ac.uk/kcl/inf/languages/g2048/G2048"
+    nsPrefix="g2048">
+  <eClassifiers xsi:type="ecore:EClass" name="G2048Program">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//Statement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TitleDefineStatement" eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SizeDefineStatement" eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LevelDefineStatement" eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" eType="#//Level"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="element" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Level">
+    <eLiterals name="one" literal="one"/>
+    <eLiterals name="two" value="1" literal="two"/>
+    <eLiterals name="three" value="2" literal="three"/>
+    <eLiterals name="four" value="3" literal="four"/>
+    <eLiterals name="five" value="4" literal="five"/>
+    <eLiterals name="six" value="5" literal="six"/>
+    <eLiterals name="seven" value="6" literal="seven"/>
+    <eLiterals name="eight" value="7" literal="eight"/>
+    <eLiterals name="nine" value="8" literal="nine"/>
+    <eLiterals name="ten" value="9" literal="ten"/>
+    <eLiterals name="eleven" value="10" literal="eleven"/>
+  </eClassifiers>
+</ecore:EPackage>

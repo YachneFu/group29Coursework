@@ -1,0 +1,2 @@
+module TestG2048 {
+}

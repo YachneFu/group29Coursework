@@ -1,0 +1,49 @@
+/* XPECT_SETUP uk.ac.kcl.inf.languages.g2048.xpect.XPectTests END_SETUP*/
+/*
+XPECT generated ---
+import java.util.HashMap;
+import uk.ac.kcl.inf.languages.g2048.library.*;
+
+public class Test1G2048 {
+
+	public static void main(String[] args) {
+        
+		int topValue=0;
+		String title="";
+		int mapsize=0;
+		
+        HashMap<Integer, String> elements = new HashMap<Integer,String>();
+        elements.put(0,"");
+        title="Chemistry";
+        mapsize=5;
+        elements.put(2,"H");topValue=2;
+        
+        elements.put(4,"He");topValue=4;
+        
+        elements.put(8,"Li");topValue=8;
+        
+        elements.put(16,"Be");topValue=16;
+        
+        elements.put(32,"B");topValue=32;
+        
+        new G2048Frame(title,mapsize,elements,topValue);
+        
+    }
+}
+
+
+---
+ */
+title "Chemistry"
+size 4
+level one:"H"
+level two:"He"
+level three:"Li"
+level four:"Be"
+level five:"B"
+level six:"C"
+level seven:"N"
+level eight:"O"
+level nine:"F"
+level ten:"Ne"
+level eleven:"Na"

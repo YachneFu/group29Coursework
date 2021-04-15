@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="test1.g2048.xt" project="uk.ac.kcl.inf.languages.g2048.xpect" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="test1.g2048.xt: src/uk/ac/kcl/inf/languages/g2048/xpect" time="0.0">
+    <testcase name="generated~0: /* 〔src/uk/ac/kcl/inf/languages/g2048/xpect/test1.g2048.xt〕" classname="uk.ac.kcl.inf.languages.g2048.xpect.XPectTests" time="0.0"/>
+  </testsuite>
+</testrun>

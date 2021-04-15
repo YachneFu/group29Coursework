@@ -1,0 +1,384 @@
+package uk.ac.kcl.inf.languages.g2048.library;
+
+import javax.swing.JPanel;
+
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.FontMetrics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+ 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+
+public class G2048Panel extends JPanel implements KeyListener{
+
+    private static int scores = 0;
+    private Cell[][] Cells; 
+    private boolean isadd = true;  
+    int n;
+
+    int CHART_GAP = 10;
+    int CHART_ARC = 20;
+    int CHART_SIZE = 86;
+    HashMap<Integer, String> elements;
+    int topValue;
+    
+    public G2048Panel(int x, HashMap<Integer,String> elements, int topValue) {
+    	n=x;
+    	this.elements=elements;
+    	this.topValue=topValue;
+        initGame(); 
+    }
+
+	private void initGame() {
+        scores = 0;
+        System.out.println("initGame");
+        Cells= new Cell[n][n];
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < n; col++) {
+            	Cells[row][col] = new Cell(); 
+            }
+        }
+     
+        for (int i = 0; i < 2; i++){
+            isadd = true;
+            creatCell();  
+        }	
+	}
+
+	private void creatCell() {
+		List<Cell> list = getEmptyCells();  
+		 
+        if (!list.isEmpty() && isadd) {  
+            Random random = new Random();
+            int index = random.nextInt(list.size());
+            Cell Cell = list.get(index);
+
+            Cell.value = (random.nextInt(4) % 3 == 0) ? 2 : 4;
+            isadd = false;
+        }
+		
+	}
+
+	private List<Cell> getEmptyCells() {
+		 List<Cell> CellList = new ArrayList<>();
+	        for (int i = 0; i < n; i++){
+	            for (int j = 0; j < n; j++){
+	                if (Cells[i][j].value == 0){
+	                	CellList.add(Cells[i][j]);
+	                }
+	            }
+	        }
+	        return CellList;
+	}
+	
+    
+    private boolean moveUp() {
+        for (int j = 0; j < n; j++) {
+            for (int i = 1, index = 0; i < n; i++) {
+                if (Cells[i][j].value > 0) {
+                    if (Cells[i][j].value == Cells[index][j].value) {
+                        scores += Cells[i][j].value + Cells[index][j].value;
+                        Cells[index][j].value = Cells[i][j].value + Cells[index][j].value;
+                        Cells[i][j].value = 0;
+                        index += 1;
+                        isadd = true;
+                    }
+                    else if (Cells[index][j].value == 0) {
+
+                    	Cells[index][j].value = Cells[i][j].value;
+                    	Cells[i][j].value = 0;
+                        isadd = true;
+                    }
+                    else if (Cells[++index][j].value == 0) {
+                    	Cells[index][j].value = Cells[i][j].value;
+                    	Cells[i][j].value = 0;
+                        isadd = true;
+                    }
+                }
+            }
+        }
+        return isadd;
+    }
+    
+    
+    private boolean moveDown(){
+        System.out.println("MoveDown");
+        for (int j = 0; j < n; j++) {
+            for (int i = n-2, index = n-1; i >= 0; i--) {
+                if (Cells[i][j].value > 0) {
+                    if (Cells[i][j].value == Cells[index][j].value) {
+                        scores += Cells[i][j].value + Cells[index][j].value;
+                        Cells[index][j].value = Cells[i][j].value + Cells[index][j].value;
+                        Cells[i][j].value = 0;
+                        index -= 1;
+                        isadd = true;
+                    }
+                    else if (Cells[index][j].value == 0) {
+                    	Cells[index][j].value = Cells[i][j].value;
+                    	Cells[i][j].value = 0;
+                        isadd = true;
+                    }
+                    else if (Cells[--index][j].value == 0) {
+                    	Cells[index][j].value = Cells[i][j].value;
+                    	Cells[i][j].value = 0;
+                        isadd = true;
+                    }
+                }
+            }
+        }
+        return isadd;
+    }
+    
+    private boolean moveLeft(){
+        for (int i = 0; i < n; i++) {
+            for (int j = 1, index = 0; j < n; j++) {
+                if (Cells[i][j].value > 0) {
+                    if (Cells[i][j].value == Cells[i][index].value) {
+                        scores += Cells[i][j].value + Cells[i][index].value;
+                        Cells[i][index].value = Cells[i][index].value + Cells[i][j].value;
+                        Cells[i][j].value = 0;
+                        index += 1;
+                        isadd = true;
+                    }
+                   
+                    else if (Cells[i][index].value == 0) {
+
+                    	Cells[i][index].value = Cells[i][j].value;
+                    	Cells[i][j].value = 0;
+                        isadd = true;
+                    }
+                    else if (Cells[i][++index].value == 0) {
+                    	Cells[i][index].value = Cells[i][j].value;
+                    	Cells[i][j].value = 0;
+                        isadd = true;
+                    }
+                }
+            }
+        }
+ 
+        return isadd;
+    }
+    
+    
+    private boolean moveRight(){
+        for (int i = 0; i < n; i++) {
+            for (int j = n-2, index = n-1; j >= 0; j--) {
+                if (Cells[i][j].value > 0) {
+                    if (Cells[i][j].value == Cells[i][index].value) {
+                        scores += Cells[i][j].value + Cells[i][index].value;
+                        Cells[i][index].value = Cells[i][j].value + Cells[i][index].value;
+                        Cells[i][j].value = 0;
+                        index -= 1;
+                        isadd = true;
+                    }
+                    else if (Cells[i][index].value == 0) {
+                    	Cells[i][index].value = Cells[i][j].value;
+                    	Cells[i][j].value = 0;
+                        isadd = true;
+                    }
+                    else if (Cells[i][--index].value == 0) {
+                    	Cells[i][index].value = Cells[i][j].value;
+                    	Cells[i][j].value = 0;
+                        isadd = true;
+                    }
+                }
+            }
+        }
+        return isadd;
+    }
+    
+    private boolean judgeGameOver(){
+        
+        G2048Frame.lscore.setText(scores + "");
+ 
+        
+        if (!getEmptyCells().isEmpty()){
+            return false;
+        }
+ 
+        
+        for (int i = 0; i < n-1; i++){
+            for (int j = 0; j < n-1; j++){
+                if (Cells[i][j].value == Cells[i][j + 1].value
+                    || Cells[i][j].value == Cells[i + 1][j].value){
+                    return false;
+                }
+            }
+        }
+        
+        return true;
+    }
+ 
+    private boolean judgeGameSuccess() {
+        
+        for (int i = 0; i< n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (Cells[i][j].value == topValue) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+   
+    @Override
+    public void paint(Graphics g){
+        super.paint(g);
+        for (int i = 0; i < n; i++){
+            for (int j = 0; j < n; j++){
+                drawChart(g, i, j);
+            }
+        }
+ 
+       
+        if (judgeGameOver()){
+            g.setColor(new Color(64, 64, 64, 150));
+            g.fillRect(0, 0, getWidth(), getHeight());  
+            g.setColor(Color.WHITE);  
+            g.setFont(new Font("Arial", Font.BOLD, 50));
+            FontMetrics fm = getFontMetrics(new Font("Arial", Font.BOLD, 50));
+            String value = "GAME OVER";  // 
+            g.drawString(value,
+                    (getWidth() - fm.stringWidth(value)) / 2,
+                    getHeight() / 2);
+        }  
+ 
+        
+        if (judgeGameSuccess()) {
+            g.setColor(new Color(64, 64, 64, 150));
+            g.fillRect(0, 0, getWidth(), getHeight());  
+            g.setColor(Color.RED);  
+            g.setFont(new Font("Arial", Font.BOLD, 50));
+            FontMetrics fm = getFontMetrics(new Font("Arial", Font.BOLD, 50));
+            String value = "CLEAR";  
+            g.drawString(value,
+                    (getWidth() - fm.stringWidth(value)) / 2,
+                    getHeight() / 2);
+          // 位置
+        }
+    }
+ 
+    /** 绘制方格 */
+    private void drawChart(Graphics g, int i, int j){
+        /* Java语言在Graphics类提供绘制各种基本的几何图形的基础上,
+           扩展Graphics类提供一个Graphics2D类,
+           它拥用更强大的二维图形处理能力,提供、坐标转换、颜色管理以及文字布局等更精确的控制。*/
+        Graphics2D g2d = (Graphics2D) g;
+        /* setRenderingHint() 方法的参数是一个键以及对应的键值。
+           KEY_ANTIALIASING: 抗锯齿提示键。对象的几何形状呈现方法是否将尝试沿形状的边缘减少锯齿现象
+           此提示允许的值有:
+           -- VALUE_ANTIALIAS_ON：使用抗锯齿模式完成呈现
+           -- VALUE_ANTIALIAS_OFF：在不使用抗锯齿模式的情况下完成呈现
+           -- VALUE_ANTIALIAS_DEFAULT：使用由实现选择的默认抗锯齿模式完成呈现
+           KEY_STROKE_CONTROL: 笔划规范化控制提示键。STROKE_CONTROL 提示键控制呈现实现是否应该或允许出于各种目的而修改所呈现轮廓的几何形状。
+           此提示允许的值有
+           -- VALUE_STROKE_NORMALIZE：几何形状应当规范化，以提高均匀性或直线间隔和整体美观。
+           -- VALUE_STROKE_PURE：几何形状应该保持不变并使用子像素精确度呈现
+           -- VALUE_STROKE_DEFAULT：根据给定实现的权衡，可以修改几何形状或保留原来的几何形状。
+           */
+        // 消除锯齿
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        // 几何形状规范化
+        g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL,
+                RenderingHints.VALUE_STROKE_NORMALIZE);
+ 
+        Cell Cell = Cells[i][j];
+        g2d.setColor(Cell.getBackground());  // 表格背景颜色
+        /* 绘制圆角
+           -- x: 填充矩形的 x 坐标
+           -- y: 填充矩形的 y 坐标
+           -- width: 填充矩形的宽度
+           -- height: 填充矩形的高度
+           -- arcwidth: 4个弧度的水平直径
+           -- archeight: 4个弧度的垂直直径 */
+        g2d.fillRoundRect(CHART_GAP + (CHART_GAP + CHART_SIZE) * j,
+                CHART_GAP + (CHART_GAP + CHART_SIZE) * i,
+                CHART_SIZE, CHART_SIZE, CHART_ARC, CHART_ARC);
+        g2d.setColor(Cell.getForeground());  // 表格前景颜色
+        g2d.setFont(Cell.getCellFont());   // 设置字体
+ 
+        // 文字设定
+        /* FontMetrics 字体属性类
+           GetAscent(): Ascent表示字体从基线到顶端的距离
+           getDescent(): Descent表示字体从基线到下降字符底端的距离
+           getLeading(): Leading 表示本文行之间的距离
+           getheight(): 字体高度  Ascent + Descent + Leading
+           StringWidth(String): 字符串宽度 */
+        FontMetrics fm = getFontMetrics(Cell.getCellFont());
+//        String value = String.valueOf(Cell.value);
+        String value=elements.get(Cell.value);
+        System.out.println(value);
+        g2d.drawString(value,
+                CHART_GAP + (CHART_GAP + CHART_SIZE) * j +
+                        (CHART_SIZE - fm.stringWidth(value)) / 2,
+                CHART_GAP + (CHART_GAP + CHART_SIZE) * i +
+                        (CHART_SIZE - fm.getAscent() - fm.getDescent()) / 2
+                        + fm.getAscent());
+ 
+    }
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+
+        switch (e.getKeyCode()){
+            /* VK_ESCAPE: Esc
+               VK_UP: ↑
+               VK_DOWN: ↓
+               VK_LEFT: ←
+               VK_RIGHT: →
+            */
+            // 重新开始游戏
+            case KeyEvent.VK_ESCAPE:
+                System.out.println("esc");
+                initGame(); // 重新开始游戏，游戏初始化
+                break;
+            // ↑
+            case KeyEvent.VK_UP:
+                moveUp();  // 向左移动
+                creatCell();  // 随机生成数字
+                break;
+            // ↓
+            case KeyEvent.VK_DOWN:
+                moveDown();  // 向右移动
+                creatCell();  // 随机生成数字
+                break;
+            // ←
+            case KeyEvent.VK_LEFT:
+                moveLeft();  // 向左移动
+                creatCell();  // 随机生成数字
+                break;
+            // →
+            case KeyEvent.VK_RIGHT:
+                moveRight();  // 向右移动
+                creatCell();  // 随机生成数字
+                break;
+            // others
+            default:
+                break;
+        }
+        repaint();
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
