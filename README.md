@@ -9,24 +9,27 @@ uk.ac.kcl.inf.languages.g2048.ui;
 uk.ac.kcl.inf.languages.g2048.ui.tests;
 
 The dependencies of uk.ac.kcl.inf.languages.g2048 should be as follows.
- org.eclipse.xtext,
- org.eclipse.xtext.xbase,
- org.eclipse.equinox.common;,
- org.eclipse.emf.ecore,
- org.eclipse.xtext.xbase.lib;,
- org.eclipse.xtext.util,
- org.eclipse.emf.common,
- org.antlr.runtime;,
- it.xsemantics.runtime;
+ org.eclipse.xtext;
+ org.eclipse.xtext.xbase;
+ org.eclipse.equinox.common;
+ org.eclipse.emf.ecore;
+ org.eclipse.xtext.xbase.lib;
+ org.eclipse.xtext.util;
+ org.eclipse.emf.common;
+ org.antlr.runtime;it.xsemantics.runtime;
 
-G2048.xtext inside uk.ac.kcl.inf.languages.g2048 describes the model
+G2048.xtext inside uk.ac.kcl.inf.languages.g2048 pakage describes the syntax.
 
-G2048Validator.xtend inside uk.ac.kcl.inf.languages.g2048.validation desribes validation that extends Type Checking g2048Types.xsemantics in uk.ac.kcl.inf.languages.g2048.typing
+G2048Generator.xtend inside uk.ac.kcl.inf.languages.g2048.generator pakage describes the semantics.
+
+G2048Validator.xtend inside uk.ac.kcl.inf.languages.g2048.validation pakage desribes validation that extends Type Checking g2048Types.xsemantics in uk.ac.kcl.inf.languages.g2048.typing
+
 
 
 RUN TIME SETUP:
 
 Right click on uk.ac.kcl.inf.languages.g2048，Run As... → Run configurations, set the workspace data location as the location of g2048-runtime folder.
+
 
 AFTER SETUP:
 
@@ -56,8 +59,13 @@ level five:"B"
 
 After you save the test.g2048, TestG2048.java should be generated in src-gen. If there are errors in code, please copy the entire code in the main function and paste it into the main function of TestG2048.java in uk.ac.kcl.inf.languages.g2048.library. Then you can run it as Java application.
 
-Screenshot to explain the above instruction: ![Image text](https://gyazo.com/3bc72e0f0777ee9603d072f435b6796b)
+Screenshot to explain the above instruction: https://gyazo.com/3bc72e0f0777ee9603d072f435b6796b
 
-There are 3 automated test cases in uk.ac.kcl.inf.languages.g2048.xpect. If it doesn't work try and add it.xsemantics.runtime to the dependencies.
+There are 3 automated test cases in uk.ac.kcl.inf.languages.g2048.xpect. Dependencies should be as follows.
+uk.ac.kcl.inf.languages.g2048;
+ uk.ac.kcl.inf.languages.g2048.ui;
+ org.eclipse.xpect.xtext.lib;
+ org.eclipse.xtext.xbase.lib;
+ it.xsemantics.runtime;
 
-Screenshot of XPECT tests: ![Image text](https://gyazo.com/e237b87149cd28178afebea071ee25fc)
+Screenshot of XPECT tests: https://gyazo.com/e237b87149cd28178afebea071ee25fc
