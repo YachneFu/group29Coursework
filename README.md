@@ -20,8 +20,11 @@ The dependencies of uk.ac.kcl.inf.languages.g2048 should be as follows.
 
 Right click on uk.ac.kcl.inf.languages.g2048，Run As... → Run configurations, set the workspace data location as the location of g2048-runtime folder.
 In runtime Eclipse, there is test.g2048 of TestG2048, you can input text in our lanugage. Available statement：
+
 title "the name of your game"
+
 size Integer
+
 level one/two/three/...../eleven:"the element name of this level"
 
 This is an example:
